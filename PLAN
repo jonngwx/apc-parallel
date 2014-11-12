@@ -1,0 +1,10 @@
+we want to solve the heat equation, dT/dt = k del^2 T in serial and parallel using OMP and MPI
+
+This will use an explicit euler for time stepping and centred finite differences in space. Boundary conditions in x are T(x,0) = cos^2 x, T(x, pi ) = sin^2 x, T(0,y) = T(pi,y)
+
+To reduce code duplication, there will be an interface which does all the solving
+
+Interface Model - containing the grid and equation and time stepper and boundary conditions. // may want to split the time stepper
+boundary conditions should be handled by the solver and defined by the model. MPI version will decide whether to use internal or external.
+
+
