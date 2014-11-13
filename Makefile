@@ -3,7 +3,7 @@ equations= heat_eq.o
 objects= $(integrators) $(equations) 
 
 CXX = CC
-CXXFLAGS = -g 
+CXXFLAGS = -g -fpermissive
 LIBS = -lm
 
 all: solver
