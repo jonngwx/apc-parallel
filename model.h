@@ -4,14 +4,14 @@
 
 class Model {
  public:
-  virtual ~Model(){}
+  virtual ~Model(){};
   
   // RHS and boundary conditions
-  virtual int rhs(double t, const double **x, double **fx) const;
-  virtual void bcx(double t, const double **x, double **fx) const;
-  virtual void bcy(double t, const double **x, double **fx) const;
-  virtual int dimen_x() const;
-  virtual int dimen_y() const;
+  virtual int rhs(double t, const double * const *x, double **fx) const =0;
+  virtual void bcx(double t, const double * const *x, double **fx) const = 0;
+  virtual void bcy(double t, const double * const *x, double **fx) const =0;
+  virtual int dimen_x() const =0;
+  virtual int dimen_y() const = 0;
 };
 
 #endif // MODEL_H

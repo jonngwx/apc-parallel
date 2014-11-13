@@ -7,9 +7,9 @@ class Heat_Eq : public Model{
  public:
   Heat_Eq(double kappa, int nx, int ny);
   ~Heat_Eq();
-  int rhs(double t, const double **x, double **fx) const;
-  void bcx(double t, const double **x, double **fx) const;
-  void bcy(double t, const double **x, double **fx) const;
+  int rhs(double t, const double * const *x, double **fx) const;
+  void bcx(double t, const double *const *x, double **fx) const;
+  void bcy(double t, const double *const *x, double **fx) const;
   void bcx_init() const;
   void bcy_init() const;
   int dimen_x() const;
