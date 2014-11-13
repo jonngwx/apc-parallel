@@ -73,3 +73,11 @@ void Heat_Eq::bcy_init() const{
   }
 
 }
+
+int Heat_Eq::dimen_x() const {
+  return nx;
+}
+
+int Heat_Eq::dimen_y() const {
+  return ny;
+}
