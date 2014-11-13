@@ -11,6 +11,7 @@ class Heat_Eq : public Model{
   void bcx(double t, const double **x, double **fx);
   void bcy(double t, const double **x, double **fx);
 
+  double **T;
   double *x;
   double *y;
   const int nx;
