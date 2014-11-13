@@ -15,6 +15,9 @@ Euler::Euler(double dt, const Model &model)
 }
 
 Euler::~Euler() {
+  for (int i = 0; i < nx; i++){
+    delete [] fx[i];
+  }
   delete [] fx;
 }
 
