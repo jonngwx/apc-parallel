@@ -8,8 +8,8 @@ class Heat_Eq : public Model{
   Heat_Eq(double kappa, int nx, int ny);
   ~Heat_Eq();
   int rhs(double t, const double **x, double **fx) const;
-  void bcx(double t, const double **x, double **fx);
-  void bcy(double t, const double **x, double **fx);
+  void bcx(double t, const double **x, double **fx) const;
+  void bcy(double t, const double **x, double **fx) const;
 
   double **T;
   double *x;

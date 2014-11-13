@@ -7,7 +7,7 @@ class Model {
   virtual ~Model(){};
   
   // RHS and boundary conditions
-  virtual int rhs(double t, const double **x, double **fx) const = 0;
+  virtual int rhs(double t, const double **x, double **fx) const;
   virtual void bcx(double t, const double **x, double **fx);
   virtual void bcy(double t, const double **x, double **fx);
 
