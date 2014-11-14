@@ -8,10 +8,8 @@ Euler::Euler(double dt, const Model &model)
       model(model) {
   fx = new double*[nx]; 
   for (int i = 0; i < nx; i++){
-    fx[i] = new double[ny];
-  }//create x and y and grid;
-
-
+    fx[i] = new double[ny]();
+  }
 }
 
 Euler::~Euler() {

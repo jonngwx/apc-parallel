@@ -1,5 +1,6 @@
 #include "heat_eq.h"
 #include <math.h>
+#include <stdio.h>
 #include "utils.h"
 
 Heat_Eq::Heat_Eq(double kappa, int nx, int ny): kappa(kappa), nx(nx), ny(ny)
@@ -13,7 +14,7 @@ Heat_Eq::Heat_Eq(double kappa, int nx, int ny): kappa(kappa), nx(nx), ny(ny)
   const double dy = pi/(ny-1);
   for (int i = 0; i < nx; i++){
     x[i] = 0 + i*dx;
-    T[i] = new double[ny];
+    T[i] = new double[ny]();
   }//create x and y and grid;
   for (int j = 0; j < ny; j++){
     y[j] = 0 + j*dy;

@@ -9,7 +9,7 @@ LIBS = -lm
 all: solver
 
 solver: solver.o $(objects)
-	$(CXX) -o $@ $^ utils.h $(LIBS)
+	$(CXX) -o $@ $^ $(LIBS)
 
 clean:
 	$(RM) *.o
