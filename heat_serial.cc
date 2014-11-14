@@ -31,7 +31,7 @@ int main(int argc, const char * argv[]){
   const double kappa = 1.;
   
   const double dx = PI/(nx-1);
-  const double dt = dx*dx/4/kappa*.95;
+  const double dt = dx*dx/4/kappa*.95; // stability condition.
 
   const double tmax = .5*PI*PI/kappa;
   double t = 0.;
@@ -49,9 +49,10 @@ int main(int argc, const char * argv[]){
   char filename[80];
   strcpy(filename,"heat_out_");
   strcat(filename,argv[1]);
-  double Tave = average((*model).get_grid(), nx,ny);
+  double Tave;
+  Tave = average((*model).get_grid(), nx,ny);
   output_2d((*model).get_grid(),nx,ny,filename);
-  printf("%1.8f\n%10.8f\n",Tave, ((float)time)/CLOCKS_PER_SEC);
+  printf("%1.8f, %10.8f\n",Tave, ((float)time)/CLOCKS_PER_SEC);
   delete model;
   delete integrator;
   return 0;

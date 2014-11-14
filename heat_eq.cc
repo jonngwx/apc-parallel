@@ -3,7 +3,7 @@
 #include <stdio.h>
 #include "utils.h"
 
-Heat_Eq::Heat_Eq(double kappa, int nx, int ny): kappa(kappa), nx(nx), ny(ny)
+Heat_Eq::Heat_Eq(double kappa, int nx, int ny): nx(nx), ny(ny), kappa(kappa)
 {
   x = new double[nx];
   y = new double[ny];
