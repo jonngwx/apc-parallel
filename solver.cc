@@ -3,6 +3,7 @@
 #include "euler.h"
 #include "utils.h"
 #include "heat_eq.h"
+#include <time.h>
 #define PI 3.14159265358979
 
 int main(int argc, const char * argv[]){
@@ -10,12 +11,26 @@ int main(int argc, const char * argv[]){
   Model * model;
   Integrator *integrator;
   
-  int nx = 8;
+  if (argc != 2){
+    printf("Requires argument <nx> \n");
+    return 0;
+  }
+
+  int nx = atoi(argv[1]);
   int ny = nx;
-  double kappa = 1.;
+
+  if (nx < 2){
+    printf("grid is too small. requires nx >= 3 for nontrivial solution");
+    return 0;
+  }
   
-  double dx = PI/(nx-1);
-  double dt = dx*dx/4/kappa*.95;
+  clock_t time;
+  time = clock();
+
+  const double kappa = 1.;
+  
+  const double dx = PI/(nx-1);
+  const double dt = dx*dx/4/kappa*.95;
 
   const double tmax = .5*PI*PI/kappa;
   double t = 0.;
@@ -27,7 +42,11 @@ int main(int argc, const char * argv[]){
     integrator->Step(t, (*model).get_grid());
     t = t+dt;
   }
-  output((*model).get_grid(),nx,ny);
+  time = clock() - time;
+  //printf("%1.8f\n",((float)time)/CLOCKS_PER_SEC);
+  // output_2d((*model).get_grid(),nx,ny);
+  double Tave = average((*model).get_grid(), nx,ny);
+  printf("%1.8f\n",Tave);
   delete model;
   delete integrator;
   return 0;
