@@ -20,5 +20,7 @@ int main(int argc, const char * argv[]){
   model = new Heat_Eq(kappa,nx,ny);
   integrator = new Euler(dt,*model);
 
+  delete model;
+  delete integrator;
   return 0;
 }
