@@ -37,8 +37,14 @@ int Heat_Eq::rhs(double t, const double * const *T, double ** fx) const{
   {
   for (int i = 1; i < (nx - 1); i++){ // use 1,n-1 due to boundary terms
 #pragma omp for
-    for (int j = 1; j < (ny - 1); j++){
+    for (int j = 1; j < (ny - 1); j+=4){
       fx[i][j] = kappa * nabla_squared(T,x,y,i,j);
+      fx[i][j+1] = kappa * nabla_squared(T,x,y,i,j+1);
+      if ((j+2) == ny-2){
+	continue;
+      }
+      fx[i][j+2] = kappa * nabla_squared(T,x,y,i,j+2);
+      fx[i][j+3] = kappa * nabla_squared(T,x,y,i,j+3);
     }
   }// boundary conditions
   }
