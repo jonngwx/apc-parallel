@@ -1,14 +1,15 @@
 integrators= euler.o
 equations= heat_eq.o
 objects= $(integrators) $(equations) utils.o
+solvers= heat_serial
 
 CXX = CC
 CXXFLAGS = -g 
 LIBS = -lm
 
-all: solver
+all: $(solvers)
 
-solver: solver.o $(objects)
+heat_serial: heat_serial.o $(objects)
 	$(CXX) -o $@ $^ $(LIBS)
 
 clean:
