@@ -4,8 +4,8 @@ objects= $(integrators) $(equations) utils.o
 solvers= heat_serial heat_omp
 
 CXX = CC
-CXXFLAGS = -g  -O3 -ffast-math -Wall
-PARALLELFLAGS = -fopenmp
+CXXFLAGS = -g  -O3 -ffast-math -Wall -fopenmp
+PARALLELFLAGS = 
 LIBS = -lm
 
 all: $(solvers)

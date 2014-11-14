@@ -44,10 +44,9 @@ int main(int argc, const char * argv[]){
     t = t+dt;
   }
   time = clock() - time;
-  //printf("%1.8f\n",((float)time)/CLOCKS_PER_SEC);
 
   char filename[80];
-  strcpy(filename,"heat_out_serial");
+  strcpy(filename,"heat_out_serial_");
   strcat(filename,argv[1]);
   double Tave;
   Tave = average((*model).get_grid(), nx,ny);
