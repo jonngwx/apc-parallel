@@ -2,7 +2,7 @@
 #define UTILS_H
 
 double average(const double * const *T ,int nx, int ny);
-void output_2d(const double * const * T, int nx, int ny);
+void output_2d(const double * const * T, int nx, int ny, const char * filename);
 
 // inline function to find the laplacian in 2-D
 // T: the function to differentiate

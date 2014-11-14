@@ -1,13 +1,16 @@
 #include "utils.h"
 #include <stdio.h>
 
-void output_2d(const double * const *T, int nx, int ny){
+void output_2d(const double * const *T, int nx, int ny, const char * filename){
+  FILE * pfile;
+  pfile = fopen(filename, "w");
   for (int i=0; i < nx; i++){
     for (int j =0; j< ny; j++){
-      printf("%2.8f ", T[i][j]);
+      fprintf(pfile, "%2.8f ", T[i][j]);
     }
-    printf("\n");
+    fprintf(pfile,"\n");
   }
+  fclose(pfile);
 }
 
 double average(const double * const *T ,int nx, int ny){

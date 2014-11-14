@@ -4,6 +4,7 @@
 #include "utils.h"
 #include "heat_eq.h"
 #include <time.h>
+#include <string.h>
 #define PI 3.14159265358979
 
 int main(int argc, const char * argv[]){
@@ -44,9 +45,13 @@ int main(int argc, const char * argv[]){
   }
   time = clock() - time;
   //printf("%1.8f\n",((float)time)/CLOCKS_PER_SEC);
-  // output_2d((*model).get_grid(),nx,ny);
+
+  char filename[80];
+  strcpy(filename,"heat_out_");
+  strcat(filename,argv[1]);
   double Tave = average((*model).get_grid(), nx,ny);
-  printf("%1.8f\n",Tave);
+  output_2d((*model).get_grid(),nx,ny,filename);
+  printf("%1.8f\n%10.8f\n",Tave, ((float)time)/CLOCKS_PER_SEC);
   delete model;
   delete integrator;
   return 0;
