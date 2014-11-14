@@ -15,6 +15,7 @@ void output_2d(const double * const *T, int nx, int ny, const char * filename){
 
 double average(const double * const *T ,int nx, int ny){
   double Tave = 0;
+#pragma omp parallel for reduction(+:Tave)
   for (int i=0; i < nx; i++){
     for (int j = 0; j < ny; j++){
       Tave = Tave + T[i][j];
