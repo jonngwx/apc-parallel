@@ -31,12 +31,12 @@ int main(int argc, const char * argv[]){
     printf("needs more than one thread to start...");
     return 0;
   }
-  
+  // omp_set_dynamic(0);
   omp_set_num_threads(nthreads);
   clock_t time;
   time = clock();
-  printf("%1d\n",omp_get_num_threads());
-  return 0;
+  //  printf("%1d, %1d\n",nthreads,omp_get_num_threads());
+  //  return 0;
   const double kappa = 1.;
   
   const double dx = PI/(nx-1);
@@ -56,7 +56,7 @@ int main(int argc, const char * argv[]){
   //printf("%1.8f\n",((float)time)/CLOCKS_PER_SEC);
 
   char filename[80];
-  strcpy(filename,"heat_out_");
+  strcpy(filename,"heat_out_omp");
   strcat(filename,argv[1]);
   double Tave;
   Tave = average((*model).get_grid(), nx,ny);
