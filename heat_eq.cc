@@ -82,3 +82,7 @@ int Heat_Eq::dimen_x() const {
 int Heat_Eq::dimen_y() const {
   return ny;
 }
+
+double ** Heat_Eq::get_grid() const{
+  return T;
+}

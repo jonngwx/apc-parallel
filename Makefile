@@ -1,6 +1,6 @@
 integrators= euler.o
 equations= heat_eq.o
-objects= $(integrators) $(equations) 
+objects= $(integrators) $(equations) utils.o
 
 CXX = CC
 CXXFLAGS = -g 

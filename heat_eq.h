@@ -14,6 +14,7 @@ class Heat_Eq : public Model{
   void bcy_init() const;
   int dimen_x() const;
   int dimen_y() const;
+  double **get_grid() const;
 
   double **T;
   double *x;
