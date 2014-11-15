@@ -3,7 +3,7 @@ equations= heat_eq.o
 objects= $(integrators) $(equations) utils.o
 solvers= heat_serial heat_omp
 
-CXX = CC
+CXX = g++
 CXXFLAGS = -g  -O3 -ffast-math -Wall -fopenmp
 PARALLELFLAGS = 
 LIBS = -lm
