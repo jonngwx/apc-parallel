@@ -8,5 +8,5 @@ def plot(filename):
     ny = s[1];
     x = np.linspace(0,np.pi,nx);
     y = np.linspace(0,np.pi,ny);
-    plt.pcolormesh(x,y,T)
+    plt.pcolormesh(x,y,np.transpose(T))
     plt.show()
