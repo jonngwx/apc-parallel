@@ -25,7 +25,6 @@ Heat_Eq_Mpi::Heat_Eq_Mpi(double kappa, int nx0, int ny0, int id, int ntasks): nx
     x[i] = offset + i*dx;
     T[i] = new double[ny]();
   }//create x and y and grid;
-  printf("%f,%f\n",x[0],x[nx-1]);
   for (int j = 0; j < ny; j++){
     y[j] = 0 + j*dy;
   }

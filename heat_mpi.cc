@@ -60,27 +60,40 @@ int main(int argc, char * argv[]){
     integrator->Step(t, (*model).get_grid());
     t = t+dt;
   }
-
-
+  MPI_Status Stat;
+  int tag = 1;
   if(rank==0){
     time = clock() - time;
     double **T = new double*[nx];
     for (int i = 0; i < nx; i++){
       T[i] = new double[ny]();
     }
+    double **myT = (*model).get_grid();
+    for (int i = 0; i < nx/size; i++){
+      for (int j = 0; j < ny; j++){
+	T[i][j] = myT[i+1][j];
+      }
+    }
     // collect data
-
+    for (int i = 1; i < size; i++){
+      MPI_Recv(T[i*nx/size],ny*nx/size, MPI_DOUBLE, i, tag, MPI_COMM_WORLD,&Stat);
+    }
     char filename[80];
     strcpy(filename,"heat_out_mpi_");
     strcat(filename,argv[1]);
     double Tave;
     Tave = average(T, nx,ny);
-    output_2d((*model).get_grid(),nx/size+2,ny,filename);
+    output_2d(T,nx,ny,filename);
     printf("%1.8f, %10.8f, %d\n",Tave, ((float)time)/CLOCKS_PER_SEC, rank);
     for (int i = 0; i < nx; i++){
       delete [] T[i];
     }    
     delete [] T;
+  } else { // others send data and consolidate
+
+    double **T = (*model).get_grid();
+    MPI_Send((void*)T[1], ny*nx/size, MPI_DOUBLE, 0, tag, MPI_COMM_WORLD);
+
   }
 
   
