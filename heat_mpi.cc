@@ -46,7 +46,7 @@ int main(int argc, char * argv[]){
   const double kappa = 1.;
   
   const double dx = PI/(nx-1);
-  const double dt = dx*dx/4/kappa*.5; // stability condition.
+  const double dt = dx*dx/4/kappa*.95; // stability condition.
 
   const double tmax = .5*PI*PI/kappa;
   double t = 0.;
@@ -76,7 +76,9 @@ int main(int argc, char * argv[]){
     }
     // collect data
     for (int i = 1; i < size; i++){
-      MPI_Recv(T[i*nx/size],ny*nx/size, MPI_DOUBLE, i, tag, MPI_COMM_WORLD,&Stat);
+      for (int j =0; j < nx/size; j++){
+	MPI_Recv(T[i*nx/size+j],ny, MPI_DOUBLE, i, tag, MPI_COMM_WORLD,&Stat);
+      }
     }
     char filename[80];
     strcpy(filename,"heat_out_mpi_");
@@ -92,7 +94,9 @@ int main(int argc, char * argv[]){
   } else { // others send data and consolidate
 
     double **T = (*model).get_grid();
-    MPI_Send((void*)T[1], ny*nx/size, MPI_DOUBLE, 0, tag, MPI_COMM_WORLD);
+    for (int i = 1; i < nx/size+1; i++){
+      MPI_Send((void*)T[i], ny, MPI_DOUBLE, 0, tag, MPI_COMM_WORLD);
+    }
 
   }
 
