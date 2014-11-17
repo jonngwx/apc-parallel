@@ -73,7 +73,7 @@ void Heat_Eq_Mpi::bcx(double t, const double * const *T, double ** fx) const{
     }
   } else {
     MPI_Status Stat;
-    if (id == 0) { // sending n-2 because n-1 T[1] of the next slice
+    if (id == 0) { // 
       MPI_Send((void*)T[nx-3], ny, MPI_DOUBLE, id+1, tag, MPI_COMM_WORLD);
       MPI_Send((void*)T[3], ny, MPI_DOUBLE, ntasks-1, tag, MPI_COMM_WORLD);
       MPI_Recv(left,ny, MPI_DOUBLE, ntasks-1, tag, MPI_COMM_WORLD,&Stat);
