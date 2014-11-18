@@ -33,8 +33,8 @@ int main(int argc, const char * argv[]){
   }
   // omp_set_dynamic(0);
   omp_set_num_threads(nthreads);
-  clock_t time;
-  time = clock();
+  double time;
+  time = omp_get_wtime();
   //  printf("%1d, %1d\n",nthreads,omp_get_num_threads());
   //  return 0;
   const double kappa = 1.;
@@ -52,7 +52,7 @@ int main(int argc, const char * argv[]){
     integrator->Step(t, (*model).get_grid());
     t = t+dt;
   }
-  time = clock() - time;
+  time = omp_get_wtime() - time;
 
   char filename[80];
   strcpy(filename,"heat_out_omp_");
@@ -60,7 +60,7 @@ int main(int argc, const char * argv[]){
   double Tave;
   Tave = average((*model).get_grid(), nx,ny);
   output_2d((*model).get_grid(),nx,ny,filename);
-  printf("%1.8f, %10.8f\n",Tave, ((float)time)/CLOCKS_PER_SEC);
+  printf("%1.8f, %10.8f\n",Tave, time);
   delete model;
   delete integrator;
   return 0;

@@ -66,10 +66,10 @@ void Heat_Eq_Mpi::bcx(double t, const double * const *T, double ** fx) const{
   // serial case
   if (ntasks == 1){
     for (int i =0; i < ny; i++){
-      left[i] = T[nx-2][i];
+      left[i] = T[nx-4][i];
     }
     for (int i =0; i < ny; i++){
-      right[i] = T[1][i];
+      right[i] = T[3][i];
     }
   } else {
     MPI_Status Stat;

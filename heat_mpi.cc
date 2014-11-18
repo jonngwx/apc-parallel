@@ -86,7 +86,7 @@ int main(int argc, char * argv[]){
     double Tave;
     Tave = average(T, nx,ny);
     output_2d(T,nx,ny,filename);
-    printf("%1.8f, %10.8f, %d\n",Tave, ((float)time)/CLOCKS_PER_SEC, rank);
+    printf("%1.8f, %10.8f, %10.8f\n",Tave, ((float)time)/CLOCKS_PER_SEC, ((float)(clock()-time))/CLOCKS_PER_SEC);
     for (int i = 0; i < nx; i++){
       delete [] T[i];
     }    
