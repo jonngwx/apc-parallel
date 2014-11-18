@@ -1,0 +1,18 @@
+#!/bin/bash
+# parallel job using 2 processors:
+#SBATCH -N 1
+#SBATCH --ntasks-per-node=2
+#SBATCH -t 0:50:00
+#SBATCH --mail-type=begin
+#SBATCH --mail-type=end
+#SBATCH --mail-type=fail
+#SBATCH --mail-user jn8@princeton.edu
+
+module load openmpi
+
+cd ~/apc/apc-parallel
+for nx in 128 256 512
+do
+    srun ./heat_mpi $nx >> heat_mpi.2.out
+    ./heat_omp $nx 2 >> heat_omp.2.out
+done
