@@ -4,10 +4,10 @@ objects_mpi = heat_eq_mpi.o euler.o utils.o
 solvers= heat_serial heat_omp heat_mpi
 
 MPICXX = mpic++
-CXX = g++
+CXX = mpic++
 CXXFLAGS = -g  -Wall -O3 -ffast-math
 OMPFLAGS = -fopenmp 
-LIBS = -lm
+LIBS = 
 
 all: $(solvers)
 
@@ -39,6 +39,6 @@ utils_omp.o: utils.cc
 	$(CXX) -c $^ $(CXXFLAGS) -o utils_omp.o  $(OMPFLAGS) $(LIBS)
 
 heat_eq_mpi.o: heat_eq_mpi.cc
-	$(MPICXX) -c -o heat_eq_mpi.o $^ $(CXXFLAGS) $(LIBS)
+	$(MPICXX) -c -o heat_eq_mpi.o $^ $(CXXFLAGS) $(LIBS) 
 clean:
 	$(RM) *.o
